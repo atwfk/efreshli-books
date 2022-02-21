@@ -6,7 +6,7 @@ export const getApi = async <T, X, Y>(
   endPoint: string,
   onSuccess: (successData: AxiosResponse<T>) => X,
   onError: (errorData: IError.IErrorData) => Y,
-  onFinished: () => void,
+  onFinished?: () => void,
 ): Promise<X | Y> => {
   try {
     const response = await api.get(endPoint);
@@ -35,6 +35,6 @@ export const getApi = async <T, X, Y>(
       errorCode: status,
     });
   } finally {
-    onFinished();
+    onFinished?.();
   }
 };

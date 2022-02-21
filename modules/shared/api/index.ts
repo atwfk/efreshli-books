@@ -8,7 +8,7 @@ export const api = axios.create({
 api.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     const { headers } = config;
-    headers!["app-id"] = "6213a59d39dc3d0667d7f3ca";
+    headers!["app-id"] = process.env.NEXT_PUBLIC_APP_ID ?? "";
     return config;
   },
   async (e: Error) => Promise.reject(e),

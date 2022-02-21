@@ -3,7 +3,7 @@ declare namespace IPostData {
     id: string;
     title: string;
     body: string;
-    publishDate: Date;
+    publishDate: string;
   }
 }
 

@@ -1,3 +1,4 @@
+import { formatToLocal } from "./../../shared/logic/formatDate";
 import { getApi } from "./../../shared/api/network";
 import { IError } from "@modules/shared/types/IError";
 import { IPostData } from "@modules/shared/types/IPostData";
@@ -8,7 +9,7 @@ const transformPostsData = (posts: IGetPosts.IPostApi[]): IPostData.IPost[] => {
     id: post.id,
     title: post.text,
     body: post.text,
-    publishDate: post.publishDate,
+    publishDate: formatToLocal(post.publishDate),
   }));
 };
 

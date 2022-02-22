@@ -10,6 +10,7 @@ const transformPostsData = (posts: IGetPosts.IPostApi[]): IPostData.IPost[] => {
     title: post.text,
     body: post.text,
     publishDate: formatToLocal(post.publishDate),
+    image: post.image,
   }));
 };
 

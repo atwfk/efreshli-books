@@ -5,15 +5,14 @@ import { IError } from "@modules/shared/types/IError";
 import type { NextPage, GetStaticProps } from "next";
 
 const Home: NextPage<IHomePage.IProps> = ({ data }) => {
-  console.log(data);
-  return <HomePage />;
+  return <HomePage data={data} />;
 };
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
     const posts = await getPosts(0);
 
-    return { props: { data: posts }, revalidate: 60 };
+    return { props: { data: { posts } }, revalidate: 60 };
   } catch (error: unknown) {
     const { message, errorCode, isError } = error as IError.IErrorData;
 

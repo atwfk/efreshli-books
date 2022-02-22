@@ -9,6 +9,7 @@ const StyledUl = styled.ul`
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   grid-gap: 20px;
   list-style: none;
+  margin-bottom: 40px;
 `;
 
 const Posts: FC<{ posts: IPostData.IPost[] }> = ({ posts }): ReactElement => {

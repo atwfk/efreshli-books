@@ -8,6 +8,7 @@ declare namespace IGetPosts {
 
   export interface IPostsResApi {
     data: IPostApi[];
+    total: number;
   }
 }
 

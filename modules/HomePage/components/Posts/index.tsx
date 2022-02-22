@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import type { FC, ReactElement } from "react";
 import Post from "@modules/shared/components/Post";
 import styled from "styled-components";
@@ -22,4 +22,4 @@ const Posts: FC<{ posts: IPostData.IPost[] }> = ({ posts }): ReactElement => {
   );
 };
 
-export default Posts;
+export default memo(Posts);

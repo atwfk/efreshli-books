@@ -1,31 +1,24 @@
 import React, { useState } from "react";
 import type { FC, ReactElement } from "react";
 import { IHomePage } from "./types/IHomePage";
-import Posts from "./components/Posts/Posts";
-import Button from "@modules/shared/components/Button";
-import styled from "styled-components";
+import Posts from "./components/Posts";
 import { getPosts } from "./api/getPosts";
 import { IError } from "@modules/shared/types/IError";
-import { IPostData } from "@modules/shared/types/IPostData";
-
-const StyledDiv = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+import LoadMore from "./components/LoadMore";
 
 const HomePage: FC<IHomePage.IProps> = ({ data }): ReactElement => {
   const [posts, setPosts] = useState(data.posts);
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
 
   const getMorePosts = async () => {
     setLoading(true);
 
     try {
-      const newPosts = (await getPosts(page + 1)) as IPostData.IPost[];
+      const { data } = (await getPosts(page)) as IHomePage.IProps;
 
-      setPosts([...posts, ...newPosts]);
-      setPage((prev) => prev++);
+      setPage(page + 1);
+      setPosts([...posts, ...data.posts]);
     } catch (error: unknown) {
       const { message, errorCode, isError } = error as IError.IErrorData;
 
@@ -38,11 +31,12 @@ const HomePage: FC<IHomePage.IProps> = ({ data }): ReactElement => {
   return (
     <section>
       <Posts posts={posts} />
-      <StyledDiv>
-        <Button isLoading={loading} clicked={getMorePosts}>
-          Load More
-        </Button>
-      </StyledDiv>
+      <LoadMore
+        clicked={getMorePosts}
+        loading={loading}
+        page={page}
+        totalPosts={data.totalPosts}
+      />
     </section>
   );
 };

@@ -4,6 +4,7 @@ declare namespace IHomePage {
   export interface IProps {
     data: {
       posts: IPostData.IPost[];
+      totalPosts: number;
     };
   }
 }

@@ -10,9 +10,12 @@ const Home: NextPage<IHomePage.IProps> = ({ data }) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const posts = await getPosts(0);
+    const { data } = (await getPosts(0)) as IHomePage.IProps;
 
-    return { props: { data: { posts } }, revalidate: 60 };
+    return {
+      props: { data: { posts: data.posts, totalPosts: data.totalPosts } },
+      revalidate: 60,
+    };
   } catch (error: unknown) {
     const { message, errorCode, isError } = error as IError.IErrorData;
 

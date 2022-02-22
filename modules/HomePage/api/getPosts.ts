@@ -1,8 +1,10 @@
+import { POSTS_LIMIT } from "../../shared/constants";
 import { formatToLocal } from "./../../shared/logic/formatDate";
 import { getApi } from "./../../shared/api/network";
 import { IError } from "@modules/shared/types/IError";
 import { IPostData } from "@modules/shared/types/IPostData";
 import { IGetPosts } from "./IGetPosts";
+import { IHomePage } from "../types/IHomePage";
 
 const transformPostsData = (posts: IGetPosts.IPostApi[]): IPostData.IPost[] => {
   return posts.map((post) => ({
@@ -16,17 +18,19 @@ const transformPostsData = (posts: IGetPosts.IPostApi[]): IPostData.IPost[] => {
 
 export const getPosts = async (
   page: number,
-): Promise<IPostData.IPost[] | IError.IErrorData> => {
+): Promise<IHomePage.IProps | IError.IErrorData> => {
   return await getApi<
     IGetPosts.IPostsResApi,
-    IPostData.IPost[],
+    IHomePage.IProps,
     IError.IErrorData
   >(
-    `/post?page=${page}&limit=8`,
+    `/post?page=${page}&limit=${POSTS_LIMIT}`,
     (response) => {
       const { data } = response;
 
-      return transformPostsData(data.data);
+      return {
+        data: { posts: transformPostsData(data.data), totalPosts: data.total },
+      };
     },
     (err) => {
       const { message, errorCode, isError } = err;

@@ -2,12 +2,13 @@ import { getPosts } from "@modules/HomePage/api/getPosts";
 import { IHomePage } from "@modules/HomePage/types/IHomePage";
 import PostPage from "@modules/PostPage";
 import { getPostById, getPostsByTag } from "@modules/PostPage/api/getPost";
+import { IPostPage } from "@modules/PostPage/types/IPostPage";
 import { IError } from "@modules/shared/types/IError";
 import { IPostData } from "@modules/shared/types/IPostData";
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
 
-const Post: NextPage = () => {
-  //   console.log(data);
+const Post: NextPage<IPostPage.IProps> = ({ data }) => {
+  console.log(data);
   return <PostPage />;
 };
 
@@ -46,14 +47,21 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = (await getPosts(0, 50)) as IHomePage.IProps;
+  try {
+    const { data } = (await getPosts(0, 50)) as IHomePage.IProps;
 
-  const paths = data.posts.map((post) => ({ params: { id: post.id } }));
+    const paths = data.posts.map((post) => ({ params: { id: post.id } }));
 
-  return {
-    paths: paths,
-    fallback: "blocking",
-  };
+    return {
+      paths: paths,
+      fallback: "blocking",
+    };
+  } catch (error: unknown) {
+    return {
+      paths: [],
+      fallback: "blocking",
+    };
+  }
 };
 
 export default Post;

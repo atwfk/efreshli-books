@@ -15,23 +15,20 @@ export const getApi = async <T, X, Y>(
   } catch (err: unknown) {
     const { response } = err as IError.IErrorResponse;
 
-    const { message: errMessage } = err as { message: string };
-
     if (!response) {
       return onError({
         isError: true,
-        message: errMessage,
+        message: "network error",
         errorCode: 500,
       });
     }
 
     const { status, data } = response;
-
     const { error } = data;
 
     return onError({
       isError: true,
-      message: error,
+      message: error ?? "network error",
       errorCode: status,
     });
   } finally {

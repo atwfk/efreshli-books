@@ -10,15 +10,18 @@ const Post: FC<{ post: IPostData.IPost }> = ({ post }): ReactElement => {
     <StyledPost>
       <Link href={`/posts/${post.id}`}>
         <a>
-          <Image
-            src={post.image}
-            alt={post.title}
-            layout="responsive"
-            objectFit="cover"
-            width={40}
-            height={25}
-          />
-          <div>
+          <div className="image-wrapper">
+            <Image
+              src={post.image}
+              alt={post.title}
+              layout="responsive"
+              objectFit="cover"
+              width={40}
+              height={25}
+            />
+          </div>
+
+          <div className="content-wrapper">
             <h3>{post.title}</h3>
             <p>{post.body}</p>
             <span>Published at: {post.publishDate}</span>

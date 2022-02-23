@@ -8,5 +8,7 @@ export const StyledNav = styled.nav`
     padding: 20px 40px;
     max-width: ${SCREENS.XL};
     margin: auto;
+    font-size: 18px;
+    font-weight: bold;
   }
 `;

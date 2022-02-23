@@ -5,6 +5,7 @@ export const StyledPostsList = styled.div`
     font-size: 20px;
     margin-bottom: 20px;
   }
+
   ul {
     list-style: none;
     li {

@@ -6,6 +6,7 @@ import { getPosts } from "./api/getPosts";
 import { IError } from "@modules/shared/types/IError";
 import LoadMore from "./components/LoadMore";
 import { POSTS_LIMIT } from "@modules/shared/constants";
+import withErrorHandler from "@modules/shared/HOC/withErrorHandler";
 
 const HomePage: FC<IHomePage.IProps> = ({ data }): ReactElement => {
   const [posts, setPosts] = useState(data.posts);
@@ -42,4 +43,4 @@ const HomePage: FC<IHomePage.IProps> = ({ data }): ReactElement => {
   );
 };
 
-export default HomePage;
+export default withErrorHandler(HomePage, "data");

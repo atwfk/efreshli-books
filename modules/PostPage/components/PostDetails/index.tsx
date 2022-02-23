@@ -3,6 +3,7 @@ import type { FC, ReactElement } from "react";
 import { IPostData } from "@modules/shared/types/IPostData";
 import Image from "next/image";
 import { StyledPost } from "./styles";
+import withErrorHandler from "@modules/shared/HOC/withErrorHandler";
 
 const PostDetails: FC<{ post: IPostData.IPost }> = ({ post }): ReactElement => {
   return (
@@ -21,4 +22,4 @@ const PostDetails: FC<{ post: IPostData.IPost }> = ({ post }): ReactElement => {
   );
 };
 
-export default PostDetails;
+export default withErrorHandler(PostDetails, "post");

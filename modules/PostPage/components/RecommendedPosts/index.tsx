@@ -1,20 +1,16 @@
 import React from "react";
 import type { FC, ReactElement } from "react";
 import { IPostData } from "@modules/shared/types/IPostData";
-import Post from "@modules/shared/components/Post";
 import { StyledPostsList } from "./styles";
+import Posts from "./Posts";
 
-const RecommendedPosts: FC<{ posts: IPostData.IPost[] }> = ({
-  posts,
-}): ReactElement => {
+const RecommendedPosts: FC<{
+  posts: IPostData.IPost[];
+}> = ({ posts }): ReactElement => {
   return (
     <StyledPostsList>
       <h3>Recommended Posts</h3>
-      <ul>
-        {posts.map((post) => (
-          <Post post={post} key={post.id} />
-        ))}
-      </ul>
+      <Posts posts={posts} />
     </StyledPostsList>
   );
 };

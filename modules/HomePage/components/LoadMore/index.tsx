@@ -1,14 +1,9 @@
 import React from "react";
 import type { FC, ReactElement } from "react";
 import Button from "@modules/shared/components/Button";
-import styled from "styled-components";
 import { POSTS_LIMIT } from "@modules/shared/constants";
 import { ILoadMore } from "./ILoadMore";
-
-const StyledDiv = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+import { StyledDiv } from "./styles";
 
 const isLastPage = (total: number, page: number): boolean => {
   return Math.ceil(total / POSTS_LIMIT) === page;

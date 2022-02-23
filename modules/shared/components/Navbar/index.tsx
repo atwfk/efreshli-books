@@ -6,9 +6,11 @@ import Link from "next/link";
 const Navbar: FC = (): ReactElement => {
   return (
     <StyledNav>
-      <Link href="/">
-        <a>Efreshli Books</a>
-      </Link>
+      <div>
+        <Link href="/">
+          <a>Efreshli Books</a>
+        </Link>
+      </div>
     </StyledNav>
   );
 };

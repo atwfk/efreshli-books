@@ -40,6 +40,7 @@ export const getPostById = async (
 
 export const getPostsByTag = async (
   tagName: string,
+  id: string,
 ): Promise<{ data: IPostData.IPost[] } | IError.IErrorData> => {
   return await getApi<
     IGetPosts.IPostsResApi,
@@ -50,7 +51,9 @@ export const getPostsByTag = async (
     (response) => {
       const { data } = response;
 
-      return { data: transformPostsData(data.data).slice(0, 2) };
+      const recommendedPosts = data.data.filter((post) => post.id !== id);
+
+      return { data: transformPostsData(recommendedPosts).slice(0, 2) };
     },
     (err) => {
       const { message, errorCode, isError } = err;

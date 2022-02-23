@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   try {
-    const { data: posts } = (await getPostsByTag(tagName)) as {
+    const { data: posts } = (await getPostsByTag(tagName, id)) as {
       data: IPostData.IPost[];
     };
     data = { ...data, recommendedPosts: posts };

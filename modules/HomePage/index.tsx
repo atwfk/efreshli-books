@@ -8,6 +8,7 @@ import LoadMore from "./components/LoadMore";
 import { POSTS_LIMIT } from "@modules/shared/constants";
 import withErrorHandler from "@modules/shared/HOC/withErrorHandler";
 import { toast } from "react-toastify";
+import Head from "next/head";
 
 const HomePage: FC<IHomePage.IProps> = ({ data }): ReactElement => {
   const [posts, setPosts] = useState(data.posts);
@@ -32,15 +33,21 @@ const HomePage: FC<IHomePage.IProps> = ({ data }): ReactElement => {
   };
 
   return (
-    <section>
-      <Posts posts={posts} />
-      <LoadMore
-        clicked={getMorePosts}
-        loading={loading}
-        page={page}
-        totalPosts={data.totalPosts}
-      />
-    </section>
+    <>
+      <Head>
+        <title>Posts | Efreshli Books</title>
+      </Head>
+
+      <section>
+        <Posts posts={posts} />
+        <LoadMore
+          clicked={getMorePosts}
+          loading={loading}
+          page={page}
+          totalPosts={data.totalPosts}
+        />
+      </section>
+    </>
   );
 };
 

@@ -7,6 +7,7 @@ import { IError } from "@modules/shared/types/IError";
 import LoadMore from "./components/LoadMore";
 import { POSTS_LIMIT } from "@modules/shared/constants";
 import withErrorHandler from "@modules/shared/HOC/withErrorHandler";
+import { toast } from "react-toastify";
 
 const HomePage: FC<IHomePage.IProps> = ({ data }): ReactElement => {
   const [posts, setPosts] = useState(data.posts);
@@ -22,9 +23,9 @@ const HomePage: FC<IHomePage.IProps> = ({ data }): ReactElement => {
       setPage(page + 1);
       setPosts([...posts, ...data.posts]);
     } catch (error: unknown) {
-      const { message, errorCode, isError } = error as IError.IErrorData;
+      const { message } = error as IError.IErrorData;
 
-      console.log({ message, errorCode, isError });
+      toast.error(message);
     } finally {
       setLoading(false);
     }

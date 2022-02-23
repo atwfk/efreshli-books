@@ -6,7 +6,9 @@ import { IPostData } from "@modules/shared/types/IPostData";
 import { IGetPosts } from "./IGetPosts";
 import { IHomePage } from "../types/IHomePage";
 
-const transformPostsData = (posts: IGetPosts.IPostApi[]): IPostData.IPost[] => {
+export const transformPostsData = (
+  posts: IGetPosts.IPostApi[],
+): IPostData.IPost[] => {
   return posts.map((post) => ({
     id: post.id,
     title: post.text,

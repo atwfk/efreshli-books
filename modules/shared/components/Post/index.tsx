@@ -8,7 +8,7 @@ import { StyledPost } from "./styles";
 const Post: FC<{ post: IPostData.IPost }> = ({ post }): ReactElement => {
   return (
     <StyledPost>
-      <Link href={`/post/${post.id}`}>
+      <Link href={`/posts/${post.id}`}>
         <a>
           <Image
             src={post.image}

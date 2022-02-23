@@ -1,4 +1,3 @@
-import { POSTS_LIMIT } from "../../shared/constants";
 import { formatToLocal } from "./../../shared/logic/formatDate";
 import { getApi } from "./../../shared/api/network";
 import { IError } from "@modules/shared/types/IError";
@@ -21,13 +20,14 @@ export const transformPostsData = (
 
 export const getPosts = async (
   page: number,
+  limit: number,
 ): Promise<IHomePage.IProps | IError.IErrorData> => {
   return await getApi<
     IGetPosts.IPostsResApi,
     IHomePage.IProps,
     IError.IErrorData
   >(
-    `/post?page=${page}&limit=${POSTS_LIMIT}`,
+    `/post?page=${page}&limit=${limit}`,
     (response) => {
       const { data } = response;
 

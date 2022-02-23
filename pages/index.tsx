@@ -1,6 +1,7 @@
 import HomePage from "@modules/HomePage";
 import { getPosts } from "@modules/HomePage/api/getPosts";
 import { IHomePage } from "@modules/HomePage/types/IHomePage";
+import { POSTS_LIMIT } from "@modules/shared/constants";
 import { IError } from "@modules/shared/types/IError";
 import type { NextPage, GetStaticProps } from "next";
 
@@ -10,7 +11,7 @@ const Home: NextPage<IHomePage.IProps> = ({ data }) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const { data } = (await getPosts(0)) as IHomePage.IProps;
+    const { data } = (await getPosts(0, POSTS_LIMIT)) as IHomePage.IProps;
 
     return {
       props: { data: { posts: data.posts, totalPosts: data.totalPosts } },

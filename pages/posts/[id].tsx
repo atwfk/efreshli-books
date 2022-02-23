@@ -1,3 +1,5 @@
+import { getPosts } from "@modules/HomePage/api/getPosts";
+import { IHomePage } from "@modules/HomePage/types/IHomePage";
 import PostPage from "@modules/PostPage";
 import { getPostById, getPostsByTag } from "@modules/PostPage/api/getPost";
 import { IError } from "@modules/shared/types/IError";
@@ -10,7 +12,7 @@ const Post: NextPage = () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { id } = params as { id: string };
+  const id = params?.id as string;
   let data = {};
   let tagName = "";
 
@@ -44,8 +46,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const { data } = (await getPosts(0, 50)) as IHomePage.IProps;
+
+  const paths = data.posts.map((post) => ({ params: { id: post.id } }));
+
   return {
-    paths: [{ params: { id: "60d21bad67d0d8992e610daf" } }],
+    paths: paths,
     fallback: "blocking",
   };
 };

@@ -15,8 +15,8 @@ const Post: FC<{ post: IPostData.IPost }> = ({ post }): ReactElement => {
             alt={post.title}
             layout="responsive"
             objectFit="cover"
-            width={80}
-            height={40}
+            width={40}
+            height={25}
           />
           <div>
             <h3>{post.title}</h3>

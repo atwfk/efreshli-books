@@ -8,8 +8,7 @@ import { IPostData } from "@modules/shared/types/IPostData";
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
 
 const Post: NextPage<IPostPage.IProps> = ({ data }) => {
-  console.log(data);
-  return <PostPage />;
+  return <PostPage data={data} />;
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {

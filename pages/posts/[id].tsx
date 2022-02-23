@@ -12,11 +12,15 @@ const Post: NextPage = () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params as { id: string };
   let data = {};
+  let tagName = "";
 
   try {
     const { data: post } = (await getPostById(id)) as {
       data: IPostData.IPost;
     };
+
+    tagName = post.tags[0];
+
     data = { ...data, post };
   } catch (error: unknown) {
     const { message, errorCode, isError } = error as IError.IErrorData;
@@ -24,7 +28,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   try {
-    const { data: posts } = (await getPostsByTag("dog")) as {
+    const { data: posts } = (await getPostsByTag(tagName)) as {
       data: IPostData.IPost[];
     };
     data = { ...data, recommendedPosts: posts };

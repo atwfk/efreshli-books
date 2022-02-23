@@ -12,6 +12,7 @@ const transformPostData = (post: IGetPosts.IPostApi): IPostData.IPost => {
     body: post.text,
     publishDate: formatToLocal(post.publishDate),
     image: post.image,
+    tags: post.tags,
   };
 };
 

@@ -5,6 +5,7 @@ declare namespace IPostData {
     title: string;
     body: string;
     publishDate: string;
+    tags: string[];
   }
 }
 

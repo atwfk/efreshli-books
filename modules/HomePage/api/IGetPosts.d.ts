@@ -4,6 +4,7 @@ declare namespace IGetPosts {
     image: string;
     text: string;
     publishDate: Date;
+    tags: string[];
   }
 
   export interface IPostsResApi {

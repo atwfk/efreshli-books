@@ -2,7 +2,7 @@ import { SCREENS } from "./../../constants";
 import styled, { createGlobalStyle } from "styled-components";
 
 export const StyledMain = styled.main`
-  padding: 20px 40px;
+  padding: 20px;
   max-width: ${SCREENS.XL};
   margin: auto;
 `;
